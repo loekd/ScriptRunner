@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ScriptRunner": {
+      "commandName": "Project",
+      "commandLineArgs": "-f Commands.txt"
+    }
+  }
+}
