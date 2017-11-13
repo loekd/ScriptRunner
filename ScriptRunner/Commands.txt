@@ -1,17 +1,47 @@
-﻿docker images
-docker run --name web -h web -d -e NO_DB=True -p 14000:80 web
+﻿color 0e
+docker images
+docker run --name iis -p 80 -d loekd/iis
+for /f %i in ('docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" iis') do set container_ip_address=%i
+explorer "http://%container_ip_address%"
+
+docker exec -ti iis cmd
+dir
+mkdir c:\testfolder
+cd testfolder
+echo "hello world" > "hello.txt"
+type hello.txt
+exit
+dir c:\testfolder
+
+docker rm -f iis
+
+echo switching to Linux containers...
+"%ProgramFiles%\Docker\Docker\DockerCli.exe" -SwitchDaemon
+
+docker images
+docker run --name web -h web -d -p 80:80 web
+docker run --name db -h db -d -e ACCEPT_EULA=y -e SA_PASSWORD=yourStrong(!)Password -p 1433:1433 microsoft/mssql-server-linux
 docker ps
-docker run --name db -h db -d -e ACCEPT_EULA=y -e SA_PASSWORD=yourStrong(!)Password -p 1433 microsoft/mssql-server-linux
+explorer "http://localhost"
+
 docker exec -ti web bash
 curl db
 exit
+
 docker rm -f web
 docker rm -f db
-docker run --network mynetwork --name web -h web -d -p 14000:80 web
-docker run --network mynetwork --name db -h db -d -e ACCEPT_EULA=y -e SA_PASSWORD=yourStrong(!)Password -p 1433 microsoft/mssql-server-linux
+docker run --network mynetwork --name web -h web -d -p 80:80 web
+docker run --network mynetwork --name db -h db -d -e ACCEPT_EULA=y -e SA_PASSWORD=yourStrong(!)Password -p 1433:1433 microsoft/mssql-server-linux
 docker exec -ti web bash
 curl db
 exit
+explorer "http://localhost"
+
+echo cleaning up
+
 docker rm -f web
 docker rm -f db
-docker ps
+docker p
+color 07s
+echo switching to Windows containers...
+"%ProgramFiles%\Docker\Docker\DockerCli.exe" -SwitchDaemon

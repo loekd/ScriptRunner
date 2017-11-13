@@ -18,25 +18,25 @@ namespace ScriptRunner.Core
             _keyboard = new InputSimulator().Keyboard;
         }
 
-        public void Display(string command, bool isBash)
+        public void Display(string command)
         {
             if (string.IsNullOrWhiteSpace(command))
                 return;
 
             SetFocus();
-            _keyboard.TextEntry(command.Trim());
-            Thread.Sleep(20);
-
-            if (isBash)
+            foreach (var character in command.Trim())
             {
-                _keyboard.KeyPress(VirtualKeyCode.BACK);
+                _keyboard.TextEntry(character);
+                Thread.Sleep(5);
             }
         }
 
         public void Execute()
         {
             SetFocus();
-            _keyboard.KeyPress(VirtualKeyCode.RETURN);
+            _keyboard.TextEntry("\r");
+
+            //_keyboard.KeyPress(VirtualKeyCode.RETURN);
         }
 
         private void SetFocus()
