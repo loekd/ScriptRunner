@@ -14,7 +14,7 @@ namespace ScriptRunner
         private static Process _subProcess;
         private static string _file;
         private static string _currentCommand;
-        private static string _fileName;
+        private static string _shellName;
 
         static Program()
         {
@@ -23,7 +23,7 @@ namespace ScriptRunner
 
         static void Main(string[] args)
         {
-            _fileName = "cmd";
+            _shellName = "cmd";
 
             if (args == null || args.Length < 2 || args[0] != "-f")
             {
@@ -32,7 +32,7 @@ namespace ScriptRunner
             }
             if (args.Length > 3 && args[2] == "-p")
             {
-                _fileName = args[3];
+                _shellName = args[3];
             }
 
             _file = args[1];
@@ -44,7 +44,7 @@ namespace ScriptRunner
 
             using (SetupLowLevelKeyboardHook())
             {
-                _subProcess = Process.Start(new ProcessStartInfo(_fileName)
+                _subProcess = Process.Start(new ProcessStartInfo(_shellName)
                 {
                     UseShellExecute = true,
                     CreateNoWindow = false,
