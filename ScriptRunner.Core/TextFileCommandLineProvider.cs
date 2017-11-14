@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace ScriptRunner.Core
 {
@@ -19,7 +20,9 @@ namespace ScriptRunner.Core
 
             using (var sw = File.OpenText(sourceFile))
             {
-                _commands = sw.ReadToEnd().Split(new []{'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+                _commands = sw.ReadToEnd().Split(new []{'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(cmd => !(cmd.StartsWith("#")))
+                    .ToArray();
             }
         }
 

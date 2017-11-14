@@ -1,4 +1,5 @@
-﻿echo hit F10 to step through this file!
+﻿#sample comment (not displayed, not executed)
+echo hit F10 to step through this file!
 color 0e
 
 dir

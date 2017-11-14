@@ -14,10 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Demo1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CommandsWindows.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Commands.txt">
+    <None Update="Demo2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

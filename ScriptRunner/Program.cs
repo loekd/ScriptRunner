@@ -27,7 +27,7 @@ namespace ScriptRunner
 
             if (args == null || args.Length < 2 || args[0] != "-f")
             {
-                Console.WriteLine("Pass file name argument: -f bla.txt");
+                Console.WriteLine("Pass file name argument: -f bla.txt, option -p cmd (process to run)");
                 return;
             }
             if (args.Length > 3 && args[2] == "-p")
@@ -48,7 +48,8 @@ namespace ScriptRunner
                 {
                     UseShellExecute = true,
                     CreateNoWindow = false,
-                    WindowStyle = ProcessWindowStyle.Normal
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    WorkingDirectory = "C:"
                 });
 
                 _commandLineProvider = new TextFileCommandLineProvider(_file);
