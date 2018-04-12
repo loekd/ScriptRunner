@@ -13,7 +13,8 @@ namespace ScriptRunner.Core
         /// Creates a new instance.
         /// </summary>
         /// <param name="sourceFile"></param>
-        public TextFileCommandLineProvider(string sourceFile)
+        /// <param name="skip"></param>
+        public TextFileCommandLineProvider(string sourceFile, int skip = 0)
         {
             if (string.IsNullOrWhiteSpace(sourceFile))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(sourceFile));
@@ -22,6 +23,7 @@ namespace ScriptRunner.Core
             {
                 _commands = sw.ReadToEnd().Split(new []{'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries)
                     .Where(cmd => !(cmd.StartsWith("#")))
+                    .Skip(skip)
                     .ToArray();
             }
         }

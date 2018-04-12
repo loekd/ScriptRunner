@@ -27,7 +27,7 @@ namespace ScriptRunner.Core
             foreach (var character in command.Trim())
             {
                 _keyboard.TextEntry(character);
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
         }
 
