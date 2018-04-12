@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Commands.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Demo1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

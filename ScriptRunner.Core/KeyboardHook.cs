@@ -38,7 +38,8 @@ namespace ScriptRunner.Core
                 int code = Marshal.ReadInt32(lParam);
                 string key = ((Keys)code).ToString();
 
-                if (string.Equals(key, "F10", StringComparison.InvariantCultureIgnoreCase))
+                if (string.Equals(key, "F10", StringComparison.InvariantCultureIgnoreCase)
+                    || string.Equals(key, "Next", StringComparison.InvariantCultureIgnoreCase))
                 {
                     OnHotKeyPressed();
                     return new IntPtr(1); //handled

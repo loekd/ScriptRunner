@@ -3,9 +3,13 @@ echo hit F10 to step through this file!
 color 0e
 
 dir
+
 mkdir "%temp%\testfolder"
 cd "%temp%\testfolder"
 echo "hello world" > "hello.txt"
 type hello.txt
 del hello.txt
-del "%temp%\testfolder" /F /Q
+cd ..
+rd testfolder
+
+exit

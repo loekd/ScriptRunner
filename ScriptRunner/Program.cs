@@ -49,8 +49,13 @@ namespace ScriptRunner
                     UseShellExecute = true,
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = "C:"
+                    WorkingDirectory = @"C:\"
                 });
+                if (_subProcess != null)
+                {
+                    _subProcess.EnableRaisingEvents = true;
+                    _subProcess.Exited += (s, e) => Application.Exit();
+                }
 
                 _commandLineProvider = new TextFileCommandLineProvider(_file);
                 _commandExecutor = new WindowsConsoleCommandExecutor(_subProcess);
@@ -80,6 +85,11 @@ namespace ScriptRunner
             if (_currentCommand == null)
             {
                 _currentCommand = _commandLineProvider.GetNextCommand();
+                if (_currentCommand == null)
+                {
+                    Console.WriteLine("Done. Hit Escape to exit.");
+                    return;
+                }
                 Console.WriteLine($"Showing command:{_currentCommand}");
                 _commandExecutor.Display(_currentCommand);
                 return;
