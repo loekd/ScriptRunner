@@ -2,7 +2,7 @@
   "profiles": {
     "ScriptRunner": {
       "commandName": "Project",
-      "commandLineArgs": "-f d:\\Projects\\gh\\Containers.Everywhere\\demo\\Demo4.txt -s 14"
+      "commandLineArgs": "-f Commands.txt -w 20"
     }
   }
 }

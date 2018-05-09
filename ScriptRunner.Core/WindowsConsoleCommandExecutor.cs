@@ -10,11 +10,13 @@ namespace ScriptRunner.Core
     public class WindowsConsoleCommandExecutor : ICommandExecutor
     {
         private readonly Process _subProcess;
+        private readonly int _sleepMs;
         private readonly IKeyboardSimulator _keyboard;
 
-        public WindowsConsoleCommandExecutor(Process subProcess)
+        public WindowsConsoleCommandExecutor(Process subProcess, int sleepMs = 20)
         {
             _subProcess = subProcess ?? throw new ArgumentNullException(nameof(subProcess));
+            _sleepMs = sleepMs;
             _keyboard = new InputSimulator().Keyboard;
         }
 
@@ -27,7 +29,7 @@ namespace ScriptRunner.Core
             foreach (var character in command.Trim())
             {
                 _keyboard.TextEntry(character);
-                Thread.Sleep(10);
+                Thread.Sleep(_sleepMs);
             }
         }
 
@@ -35,15 +37,13 @@ namespace ScriptRunner.Core
         {
             SetFocus();
             _keyboard.TextEntry("\r");
-
-            //_keyboard.KeyPress(VirtualKeyCode.RETURN);
         }
 
         private void SetFocus()
         {
             Interop.SetActiveWindow(_subProcess.MainWindowHandle);
             Interop.SetForegroundWindow(_subProcess.MainWindowHandle);
-            Thread.Sleep(200);
+            Thread.Sleep(10 * _sleepMs);
         }
 
 
